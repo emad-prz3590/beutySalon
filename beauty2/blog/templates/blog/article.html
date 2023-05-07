@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block title %}مقاله{% endblock %}
+
+{% block body %}
+<section>
+    <main>
+        <div class="container" style="direction: ltr;"> 
+            <div class="row">
+                <div class="col-lg-4 col-md-4  mt-5">
+                    <div  style="background-color: #F3F0EB;border-radius: 53px;max-width: 292px;">
+                        <div class="d-flex justify-content-around">
+                            
+                            <div class="d-flex align-items-center">
+                              <i
+                                style="color: #4e4d48; font-size: 15px"
+                                class="bi bi-eye"
+                              ></i>
+
+                              <p style="font-size: 14px" class="m-0 ps-1">
+                                {{ article.view }}
+                              </p>
+                            </div>
+          
+                            <div class="d-flex align-items-center">
+                              <i
+                                style="color: #4e4d48; font-size: 14px"
+                                class="bi bi-calendar3 pb-1"
+                              ></i>
+
+                              <p style="font-size: 14px" class="ps-1 m-0 p-2">
+                                  {{ article.creation_date }}
+                              </p>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 mt-5">
+                    <h1
+                        class="text-end"
+                        style="font-size: 24px; font-weight: 600">
+                        {{ article.title }}   
+                    </h1>
+                </div>
+
+
+                <!-- start image -->
+                <section>
+                  <div class="row m-0 p-0">   
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                        <div class="mt-4 mb-4 justify-content-center">
+                            <img class="w-100" src="{{ article.one_banner.url }}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                        <div class="mt-4 mb-4 justify-content-center">
+                            <img class="w-100" src="{{ article.two_banner.url }}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                        <div class="mt-4 mb-4 justify-content-center">
+                            <img class="w-100" src="{{ article.tree_banner.url }}" alt="">
+                        </div>
+                    </div>
+                  </div> 
+                </section> 
+                <!-- end image -->
+
+
+
+                <!-- start articles -->
+                <section>
+                  <div class="row p-0 m-0">
+                    <div dir="rtl" class="justify-content-center text-center" style="text-align: justify !important;">
+
+                        <p style="text-align: justify;font-weight: 400;font-size: 14px;line-height: 
+                        39.52px;text-align: justify;" class="text-justify justify-content-center">
+                           {{ article.discription|safe }}
+                    </div>
+                  </div>
+                </section>
+                <!-- end articles -->
+
+
+                <!-- related_articles -->
+                <section class="container my-4" dir="rtl">
+                    <div class="d-flex justify-content-center flex-column align-items-center mb-4">
+                      {% if related_articles %}
+                        <h1 style="font-size: 24px; font-weight:500">
+                        مقالات مرتبط
+                        </h1>
+                        
+                    </div>
+                    <div class="row">
+                        {% for related_article in related_articles %}
+                          <div class="mb-4 col-xl-6  col-sm-12 col-12">
+                            
+                            <div class="d-flex flex-column " style="background: #EFEDED;">
+                              <div style="position: relative;">
+                                <img class="w-100" style="height: 
+                                342px;" src="{{ related_article.image.url }}" alt="{{ article.title }}">
+                                <div class="mb-5 d-flex justify-content-around p-1" style="background-color: #ffffff;
+                                width: 258px;border-radius: 47.25px;position: absolute;left: 33%;
+                                top: 88%;">
+                                    <span class="bi bi-calendar-day" style="color: #000000;
+                                    opacity: 0.5;">
+                                      {{ related_article.creation_date }}
+                                    </span>
+                                    <span class="bi bi-eye" style="color: #000000;
+                                    opacity: 0.5;">
+                                      {{ related_article.view }}
+                                    </span>
+                                </div>
+                              </div>  
+                              
+                              <div  class="p-4" style="background-color: #EFEDED;">
+                                <h4 style="font-style: normal;
+                                font-weight: 500;
+                                font-size: 20px;
+                                line-height: 34px;
+                                text-align: right;
+                                
+                                color: #000000;">{{ related_article.title }}</h4>
+                                <p style="font-style: normal;
+                                font-weight: 400;
+                                font-size: 16px;
+                                line-height: 27px;
+                                text-align: justify;
+                                letter-spacing: 0.02em;
+                                
+                                color: #555555;">{{ related_article.short_discription }}</p>
+                                <div class="d-flex w-100 justify-content-end">
+                                  <a href="{% url 'blog:article' slug=article.slug %}">
+                                    <button style="width: 200px;
+                                    background: #9E8A68;
+                                    border-radius: 131px;font-weight: 500;
+                                    border: 0;
+                                    padding: 15px 15px;
+                                    font-size: 18px;
+                                    text-align: center;
+                                    color: #FFFFFF;
+                                    height: 37px;" class="pt-1"
+                                    > مشاهده بیشتر </button>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        {% endfor %}
+                    </div>
+                      {% endif %}
+                  </section>
+            </div>
+        </div>
+    </main>
+</section>
+
+
+
+{% endblock  %}

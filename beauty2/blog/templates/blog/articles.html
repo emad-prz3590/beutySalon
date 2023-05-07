@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}مقالات{% endblock %}
+
+{% block body %} 
+
+<main style="background-color: #606060">
+    <div class="container" style="max-width: 2000px; position: relative">
+        <img src="{% static 'img/n.png' %}" style="width: 50%; position: absolute" alt="" />
+        <h2 class="w-100 pt-5 mb-5" style="text-align: center; color: white">
+          مقالات  
+        </h2>
+        <div class="row">
+          <div
+            class="col-lg-3 col-md-12 d-flex justify-content-center h-25 px-4 col-12 sticky-lg-top"
+          >
+            <div
+              class="d-flex flex-column p-3 "
+              style="
+                background-color: #5e5e5e;
+  
+                width: 100%;
+              "
+            >
+            
+              <div class="input-group mb-3" style="position: relative">
+                <form action="">
+                  <input
+                  type="text"
+                  class="form-control p-2"
+                  placeholder="چی میخوای جستجو کنم"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  style="height: 50px"
+                />
+                </form>
+                <div
+                  class="input-group-prepend"
+                  style="position: absolute; left: 10px; top: 10px"
+                >
+                  <i
+                    class="bi bi-search p-2 rounded-4"
+                    style="color: #5e5e5e; font-size: 25px"
+                  ></i>
+                </div>
+              </div>
+              <ul>
+                <h5
+                  class="text-muted opacity-5"
+                  style="color: #ffffff !important; font-size: 23px"
+                >
+                  دسته بندی ها
+                </h5>
+                <li class="my-3" style="list-style: url(./images/Ellipse\ 4.png)">
+                  <a style="text-decoration: none" href="" class="text-white"
+                    >تکنولوژی
+                  </a>
+                </li>
+                <li class="my-3" style="list-style: url(./images/Ellipse\ 4.png)">
+                  <a style="text-decoration: none" href="" class="text-white"
+                    >دستگاه صنعتی
+                  </a>
+                </li>
+                <li class="my-3" style="list-style: url(./images/Ellipse\ 4.png)">
+                  <a style="text-decoration: none" href="" class="text-white"
+                    >بهترین حس
+                  </a>
+                </li>
+                <li class="my-3" style="list-style: url(./images/Ellipse\ 4.png)">
+                  <a style="text-decoration: none" href="" class="text-white"
+                    >درباره ما
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-9">
+            <div class="row">
+              {% for article in articles %}
+              <div class="mb-4 col-xl-6  col-sm-12 col-12">
+                
+                <div class="d-flex flex-column " style="background: #EFEDED;">
+                  <div style="position: relative;">
+                    <img  class="w-100 img-fluid" style="height: 
+                    342px;" src="{{ article.image.url }}" alt="">
+                    <div class="mb-5 d-flex justify-content-around p-1" style="background-color: #ffffff;
+                    width: 258px;border-radius: 47.25px;position: absolute;left: 33%;
+                    top: 88%;">
+                        <span class="bi bi-calendar-day" style="color: #000000;
+                        opacity: 0.5;">
+                          {{ article.creation_date }}
+                        </span>
+                        <span class="bi bi-eye" style="color: #000000;
+                        opacity: 0.5;">
+                          {{ article.view }}
+                        </span>
+                    </div>
+                  </div>  
+                  
+                  <div  class="p-4" style="background-color: #EFEDED;">
+                    <h4 style="font-style: normal;
+                    font-weight: 500;
+                    font-size: 20px;
+                    line-height: 34px;
+                    text-align: right;
+                    
+                    color: #000000;">{{ article.title }} </h4>
+                    <p style="font-style: normal;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 27px;
+                    text-align: justify;
+                    letter-spacing: 0.02em;
+                    
+                    color: #555555;"> {{ article.short_discription }}  </p>
+                    <div class="d-flex w-100 justify-content-end">
+                      <a href="">
+                        <button style="width: 200px;
+                        background: #9E8A68;
+                        border-radius: 131px;font-weight: 500;
+                        border: 0;
+                        padding: 15px 15px;
+                        font-size: 18px;
+                        text-align: center;
+                        color: #FFFFFF;
+                        height: 37px;" class="pt-1"
+                        > مشاهده بیشتر</button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              <div class="w-100 my-5">
+                 <div class="d-flex justify-content-center pagination justify-content-center">
+                    <div
+                      class="p-2 mx-1 text-black d-flex align-items-center justify-content-center"
+                      style="
+                        cursor: pointer;
+                        background-color: #ffffff;
+                        border: 1px solid #3c3c3c;
+                        min-width: 32px;
+                        height: 32px;
+                      "
+                    >
+                      
+                        بعدی
+                    </div>
+                    
+                            <div
+                              class="p-2 mx-1 text-white d-flex align-items-center justify-content-center"
+                              style="
+                                cursor: pointer;
+                                background-color: #3c3c3c;
+                                border: 1px solid #3c3c3c;
+                                min-width: 32px;
+                                height: 32px;
+                              "
+                            >
+                                2
+                            </div>
+                        
+                            <div
+                            class="p-2 mx-1 text-white d-flex align-items-center justify-content-center"
+                            style="
+                              cursor: pointer;
+                              background-color: #3c3c3c;
+                              border: 1px solid #3c3c3c;
+                              min-width: 32px;
+                              height: 32px;
+                            "
+                          >
+                            1
+                          </div>
+                        
+                    
+                    
+                    <div
+                      class="p-2 mx-1 text-black d-flex align-items-center justify-content-center"
+                      style="
+                        cursor: pointer;
+                        background-color: #ffffff;
+                        border: 1px solid #3c3c3c;
+                        min-width: 32px;
+                        height: 32px;
+                      "
+                    >
+                      قبلی
+                    </div>
+                    
+                  </div>
+                  
+               </div>
+
+               
+
+
+                  
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+</main>
+
+{% endblock %}

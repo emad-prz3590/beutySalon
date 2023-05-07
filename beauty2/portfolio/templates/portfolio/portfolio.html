@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}نمونه کار {% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/portfolio.css' %}">
+{% endblock %}
+
+{% block body %}
+<section>
+    <div class="container">
+        <div class="col-12 my-5">
+            <h1
+                class="text-center"
+                style="font-size: 32px; font-weight: 500">
+                نمونه کارهای ما
+            </h1>
+        </div>
+        <div class="container-lg" >
+            <div class="row">
+                <!-- start list -->
+                <div class="col-lg-3 col-md-4 col-sm-5 col-12 
+                    justify-content-start sticky-xl-top mb-5 p-0 ps-lg-3 ps-3"
+                    style="height: fit-content; top: 50px">
+                    <!-- button -->
+                    
+                    {% for cat in category %}
+                      <a class="capcher" href="{{ data.get_absolute_url }}" style="cursor: pointer;text-decoration: none;">
+                        <div class="mb-2" style="background-color: #F3F0EB;
+                          border-radius: 20px 0px 0px 20px;max-width: 252px;height: 46px;cursor: pointer;">
+                          <div class="d-flex justify-content-start ps-4">
+                            <div class="col-1 pe-2 pt-3" style="width: 36px;height: 46px;background-color: #A2886A;border-radius: 20px 0px 0px 20px;">
+                              <img class="d-flex" style="width: 13px;height: 13px;" src="{% static 'img/massage 6.png' %}" alt="">
+                            </div>
+                            <div class="col-11 m-0 pt-2 pe-3 pb-1">
+                              <a href="{{ cat.get_absolute_url }}" class="m-0 capcher"
+                                style="font-size: 16px;color: #1E1E1E;text-decoration: none;font-weight: 500;">
+                                {{ cat.name }}
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                      {% endfor %}
+                  </div>
+                <!-- end list -->
+                
+                
+                <!-- start portolio -->
+                <div class="col-lg-9 col-md-8 col-sm-7 col-12" >
+                    <div class="row justify-content-center ">
+                        {% for photo in photos %}
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-3 m-0 ">
+                            <p>{{ photo.category }}</p>
+                            <img class="w-100"  src="{{ photo.image.url }}" alt="{{ photo.title }}">
+                        </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- end portolio -->
+                
+
+{% endblock %}
