@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from .forms import ArticleSearchForm
-
+from math import ceil
 
 def article(request, title):
     article = get_object_or_404(Article, title=title.replace('-', ' '))
@@ -34,23 +34,27 @@ def article(request, title):
 
 
 # صحفه مقالات   
+
+
+def category_articles(request, category_slug):
+    category = get_object_or_404(Category, slug=category_slug)
+    articles = Article.objects.filter(category=category)
+    context = {'category': category , 'articles':articles}
+    return render(request, 'blog/articles.html', context)
+
+
+
+
+
 def articles(request):
     category = Category.objects.all()
     form = ArticleSearchForm(request.GET or None)
-    search_query = request.GET.get('search')
     articles = Article.objects.all()
-    
-    
-    if request.method == 'POST' and search_query:
-        article_list = Article.objects.filter(title__icontains=search_query)
-    elif search_query:
-        article_list = Article.objects.filter(title__icontains=search_query)
-    else:
-        article_list = Article.objects.all()
-
-    paginator = Paginator(article_list, 6)
-    page_number = request.GET.get('page')
+    article_list = Article.objects.all()
+    per_page = 6
+    paginator = Paginator(article_list, per_page)
+    total_pages = ceil(article_list.count() / per_page)
+    page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
-
-    context = {'page_obj': page_obj, 'form': form , 'articles':articles , 'category' : category}
+    context = {'page_obj': page_obj, 'form': form, 'category': category, 'total_pages': total_pages , 'articles':articles}
     return render(request, 'blog/articles.html', context)
