@@ -6,8 +6,8 @@ from django.db.models import Q
 from .forms import ArticleSearchForm
 
 
-def article(request, slug):
-    article = get_object_or_404(Article, slug=slug)
+def article(request, title):
+    article = get_object_or_404(Article, title=title.replace('-', ' '))
 
     if 'article_' + str(article.id) not in request.session:
         request.session['article_' + str(article.id)] = True
@@ -35,11 +35,15 @@ def article(request, slug):
 
 # صحفه مقالات   
 def articles(request):
-    articles = Article.objects.all()
-    form = ArticleSearchForm(request.GET)
+    category = Category.objects.all()
+    form = ArticleSearchForm(request.GET or None)
     search_query = request.GET.get('search')
-
-    if search_query:
+    articles = Article.objects.all()
+    
+    
+    if request.method == 'POST' and search_query:
+        article_list = Article.objects.filter(title__icontains=search_query)
+    elif search_query:
         article_list = Article.objects.filter(title__icontains=search_query)
     else:
         article_list = Article.objects.all()
@@ -48,5 +52,5 @@ def articles(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    context = {'page_obj': page_obj, 'articles': articles, 'form': form}
+    context = {'page_obj': page_obj, 'form': form , 'articles':articles , 'category' : category}
     return render(request, 'blog/articles.html', context)

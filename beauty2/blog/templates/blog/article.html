@@ -99,9 +99,9 @@
                         {% for related_article in related_articles %}
                           <div class="mb-4 col-xl-6  col-sm-12 col-12">
                             
-                            <div class="d-flex flex-column " style="background: #EFEDED;">
+                            <div class="d-flex flex-column" style="background: #EFEDED;">
                               <div style="position: relative;">
-                                <img class="w-100" style="height: 
+                                <img class="w-100" style="height:
                                 342px;" src="{{ related_article.image.url }}" alt="{{ article.title }}">
                                 <div class="mb-5 d-flex justify-content-around p-1" style="background-color: #ffffff;
                                 width: 258px;border-radius: 47.25px;position: absolute;left: 33%;
@@ -134,7 +134,7 @@
                                 
                                 color: #555555;">{{ related_article.short_discription }}</p>
                                 <div class="d-flex w-100 justify-content-end">
-                                  <a href="{% url 'blog:article' slug=article.slug %}">
+                                  <a href="{% url 'blog:article' title=related_article.title %}">
                                     <button style="width: 200px;
                                     background: #9E8A68;
                                     border-radius: 131px;font-weight: 500;

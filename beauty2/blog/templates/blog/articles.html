@@ -15,7 +15,7 @@
             class="col-lg-3 col-md-12 d-flex justify-content-center h-25 px-4 col-12 sticky-lg-top"
           >
             <div
-              class="d-flex flex-column p-3 "
+              class="d-flex flex-column p-3"
               style="
                 background-color: #5e5e5e;
   
@@ -51,26 +51,13 @@
                 >
                   دسته بندی ها
                 </h5>
-                <li class="my-3" style="list-style: url(./images/Ellipse\ 4.png)">
+              {% for cat in category %}
+                <p class="my-3 me-3" style="list-style: url(./images/Ellipse\ 4.png)">
                   <a style="text-decoration: none" href="" class="text-white"
-                    >تکنولوژی
+                    >{{ cat.name }}
                   </a>
-                </li>
-                <li class="my-3" style="list-style: url(./images/Ellipse\ 4.png)">
-                  <a style="text-decoration: none" href="" class="text-white"
-                    >دستگاه صنعتی
-                  </a>
-                </li>
-                <li class="my-3" style="list-style: url(./images/Ellipse\ 4.png)">
-                  <a style="text-decoration: none" href="" class="text-white"
-                    >بهترین حس
-                  </a>
-                </li>
-                <li class="my-3" style="list-style: url(./images/Ellipse\ 4.png)">
-                  <a style="text-decoration: none" href="" class="text-white"
-                    >درباره ما
-                  </a>
-                </li>
+                </p>
+              {% endfor %}
               </ul>
             </div>
           </div>
@@ -82,7 +69,7 @@
                 <div class="d-flex flex-column " style="background: #EFEDED;">
                   <div style="position: relative;">
                     <img  class="w-100 img-fluid" style="height: 
-                    342px;" src="{{ article.image.url }}" alt="">
+                    342px;" src="{{ article.image.url }}" alt="{{ article.title }}">
                     <div class="mb-5 d-flex justify-content-around p-1" style="background-color: #ffffff;
                     width: 258px;border-radius: 47.25px;position: absolute;left: 33%;
                     top: 88%;">
@@ -114,7 +101,7 @@
                     
                     color: #555555;"> {{ article.short_discription }}  </p>
                     <div class="d-flex w-100 justify-content-end">
-                      <a href="">
+                      <a href="{% url 'blog:article' title=article.title %}">
                         <button style="width: 200px;
                         background: #9E8A68;
                         border-radius: 131px;font-weight: 500;
@@ -143,8 +130,7 @@
                         height: 32px;
                       "
                     >
-                      
-                        بعدی
+                      بعدی
                     </div>
                     
                             <div
